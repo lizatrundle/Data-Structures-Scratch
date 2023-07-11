@@ -1,0 +1,62 @@
+
+
+1. what is a leaf node 
+    any node in the tree that does not have children 
+
+2. what is a root node 
+    the first node or the top node in the tree, that is the ancestor of all other nodes in the tree
+
+3. how do you find the LCA? 
+    check if the root is greater than the two nodes (then search in the left subtree), 
+    check if root is less than the two nodes (then search in the right subtree)
+    check if the root is between the two nodes (then the root is the LCA) 
+    --- do this with a loop where you update the value of the root to either the left or right child each time 
+
+4. how to check if a given BST is a subtree of another BST
+    consider you have BST A, we want to check if BST B is a subtree of A 
+    first check if you find a node in A that is also in B 
+    once you find this common node, check if the nodes that come after that one is also part of B
+    if yes, then we can confirm B is a subtree of A 
+
+5. how to find the distance between two nodes in a BST 
+    the distance btw n1 and n2 is the minimum number of edges that need to be traversed to reach from one 
+    node to the other 
+    traverse the shortest distance between the two nodes 
+
+6. what is an AVL tree 
+    this is a self balancing binary tree that checks the height of its left and right subtree and assures that 
+    the difference is not more than 1. this difference is called the balance factor.
+    balance factor = height(left subtree) - height(right subtree)
+    if the balance factor is more than 1, the tree is balanced using either left rotation, right rotation, left-right rotation, and right-right rotation 
+
+7. how to check if two trees are identical 
+    1. check data of root node ( tree1data == tree2data)
+    2. check left subtree recursively. call sametree(tree1.left, tree2.left)
+    3. same for right 
+    4. if all are true, they are identical 
+
+8. how are binary trees represented in memory 
+    a small and nearly complete binary tree can be stored in a linear array. you have to consider the nodes positional indexes to store the 
+    binary tree in a linear array 
+
+9. how are binary trees used for data compression?
+    huffman coding is used to create a binary tree that can compress data. Data compression encodes data to use fewer bits.
+    first, huffman coding builds a binary tree based on the text to compress. it then inserts the characters encodings in the nodes 
+    depending on their frequency within the text. A characters encoding is achieved by traversing the tree from its root to node
+    recurring characters will boast a shorter path than the less occuring characters. the purpose is to decrease the number of bits for 
+    more frequent characters and ascertain maximum data compression 
+
+10. how is a binary tree a recursive data structure?
+    a recursive data structure is partially composed of smaller instances of the same data structure. 
+    A binary tree is a recursive data structure because it can be defined in two ways: either an empty tree
+    or a node pointer to two binary trees (left and right child) 
+
+11. find the kth largest element in a BST 
+
+    1. brute force solution: do an inorder traversal and output a list then index into it 
+        this is a problem because of the extra space used to store the array and then index 
+    2. recrusive in place solution : reverse in order traversal
+        while doing the reverse inorder traversal, keep decreasing the value of k one by one after accessing each node 
+        when k becomes equal to 0, we stop the current traversal and return that node 
+    3. iterative in place solution : reverse in order traversal using a stack
+    4. efficient solution using BST augmentation
