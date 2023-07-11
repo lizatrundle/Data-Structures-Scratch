@@ -1,37 +1,54 @@
-import myqueue
-
-
-class StackFromQueue:
+from collections import deque
+ 
+ 
+class Stack:
+ 
     def __init__(self):
-        self.q = myqueue.Queue()
  
-    def is_empty(self):
-        return self.q.isempty()
+        # Two inbuilt queues
+        self.q1 = deque() #USED TO STORE THE QUEUE
+        self.q2 = deque() #KEPT EMPTY, USED TO SHIFT ELEMENTS IN THE PUSH OPERATION
  
-    def push(self, data):
-        self.q.enqueue(data)
+    def push(self, x):
+ 
+        # Push x first in empty q2
+        self.q2.append(x)
+ 
+        # Push all the remaining
+        # elements in q1 to q2.
+        while (self.q1):
+            self.q2.append(self.q1.popleft()) # popleft removes and returns leftmost element (most recently added)
+ 
+        # swap the names of two queues
+        self.q1, self.q2 = self.q2, self.q1
  
     def pop(self):
-        for _ in range(len(self.q.queue) - 1):
-            dequeued = self.q.dequeue()
-            self.q.enqueue(dequeued)
-        return self.q.dequeue()
-
-
-
-
-if __name__ == "__main__":
-    s = StackFromQueue()
-    s.push(5)
-    s.push(6)
-    s.push(8)
+ 
+        # if no elements are there in q1
+        if self.q1:
+            self.q1.popleft()
+ 
+    def top(self):
+        if (self.q1):
+            return self.q1[0]
+        return None
+ 
+    def size(self):
+        return len(self.q1)
+ 
+ 
+# Driver Code
+if __name__ == '__main__':
+    s = Stack()
     s.push(1)
     s.push(2)
     s.push(3)
-    
-    # print(s.pop)
+ 
+    print("current size: ", s.size())
+    print(s.top())
     s.pop()
-    print(s.q)
-    # s.pop()
-    # s.pop()
-    # print(s)
+    print(s.top())
+    s.pop()
+    print(s.top())
+ 
+    print("current size: ", s.size())
