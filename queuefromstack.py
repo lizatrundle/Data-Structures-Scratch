@@ -1,46 +1,44 @@
+
 class Queue:
     def __init__(self):
-        # Initializing the stacks
         self.s1 = []
         self.s2 = []
  
-    # Function to implement enqueue
-    def enqueue(self, element):
-        # Pushing element in the stack
-        self.s1.append(element)
-
-    def empty(self):
-        if (len(self.s1) == 0 and len(self.s2) == 0):
-            return True
-        return False
-        
+    def enQueue(self, x):
+         
+        # Move all elements from s1 to s2
+        while len(self.s1) != 0:
+            self.s2.append(self.s1[-1])
+            self.s1.pop()
  
-    # Function to implement dequeue operation 
-    def dequeue(self):
-        # Condition where the queue is empty
-        if self.empty():
-            print("the queue is Empty")
-            return
+        # Push item into self.s1
+        self.s1.append(x)
  
-        elif (len(self.s2) == 0 and len(self.s1) > 0):
-            while len(self.s1):
-                element = self.s1.pop()
-                self.s2.append(element)
-            return self.s2.pop()
+        # Push everything back to s1
+        while len(self.s2) != 0:
+            self.s1.append(self.s2[-1])
+            self.s2.pop()
  
-        else:
-            # Popping the top element from the stack
-            return self.s2.pop()
-        
-
-if __name__ == "__main__":
-    s = Queue()
-    s.enqueue(5)
-    s.enqueue(6)
-    s.enqueue(8)
-    print(s.s1)
-    s.dequeue()
-    print(s.s2)
-    # s.pop()
-    # s.pop()
-    # print(s)
+    # Dequeue an item from the queue
+    def deQueue(self):
+         
+            # if first stack is empty
+        if len(self.s1) == 0:
+            return -1;
+     
+        # Return top of self.s1
+        x = self.s1[-1]
+        self.s1.pop()
+        return x
+ 
+# Driver code
+if __name__ == '__main__':
+    q = Queue()
+    q.enQueue(1)
+    q.enQueue(2)
+    q.enQueue(3)
+ 
+    print(q.deQueue())
+    print(q.deQueue())
+    print(q.deQueue())
+ 
