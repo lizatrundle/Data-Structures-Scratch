@@ -1,0 +1,49 @@
+
+
+How do you create a stack from a queue (in words)?
+- stack can be implemented using two queues
+
+given a queue data structure that supports standard operations like enqueue() and dequeue(), 
+the task is to implement a stack data structure using only instances of Queue and Queue operations 
+
+idea:
+this way works by making the push() operation costly (O(N)) while the pop() operation is O(1)
+
+keep the newly entered element at the front of q1 so that pop dequeues from q1
+q2 is used to put every new element at the front of q1 
+
+the steps to implement the push operation O(n)
+- enqueue x to q2
+- one by one, dequeue everything from q2 and enqueue to q2
+- swap the elements of q1 and q2 
+
+pop operation O(1)
+- dequeue an element from q1 and return 
+
+
+How do you create a queue from stack (in words)?
+- queue can be implemented using two stacks
+
+given a stack data structure with push and pop operations, the task is to implement
+a queue using instances of stack data stuctures and operations 
+
+idea:
+the way this works is making the enqueue() operation costly (O(N)) while the dequeue operation is O(1)
+
+ensures that the oldest entered element is always at the top of stack 1, so that dequeue just pops from stack 1
+- use stack2 to put the element at the top of stack1
+
+the steps to implement the enqueue operation O(n)
+- while stack1 is not empty, push everything from stack 1 to stack 2
+- push x to stack 1
+- push everything back to stack 1
+
+dequeue operation O(1)
+- if stack 1 is empty then error 
+- else pop an item from stack 1 and return it 
+
+
+
+
+
+
